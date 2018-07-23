@@ -15,11 +15,7 @@ class BenefitTest < ActiveSupport::TestCase
   end
 
   def test_loads_seeds
-    assert_equal 3, Benefit.count
-    known_plan = Benefit.first.plans.first
-    Benefit.all.each do |benefit|
-      assert_equal known_plan, benefit.plans.first
-    end
+    assert_equal 7, Benefit.count
   end
 
   def test_must_be_valid
