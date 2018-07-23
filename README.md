@@ -1,27 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Expects ruby 2.5.0
+- Expects some local libraries including the libsqlite3 dev library
+- running ./bin/setup from this directory should handle setting things up
+- You can start the server with `rails server` and view it at http://localhost:3000
+- You can run the tests with `rake test` after setup
 
 ## Challenge Overview
 Build a website for a company that sells subscriptions to legal plans in different countries. The app does not need to be hosted anywhere but should work as expected when run locally.
@@ -41,7 +26,9 @@ Build a website for a company that sells subscriptions to legal plans in differe
 - Handle edge cases
 - Build a RESTful API with the following resources:
    * GET all plans available for a country (return a list of id, name, price)
+     - Available at /countries/:id.json
    * GET a single plan for a country (return a list of id, name, price and benefit information (benefit name, description))
+     - Available at /countries/:country_id/plans/:id.json
 - Write an integration test for at least one of the routes
 - Write some unit tests for your models
 
@@ -54,6 +41,5 @@ Build a website for a company that sells subscriptions to legal plans in differe
 - You can actually embed your translations in the DB if you're using Postgres & hstore
 - Storing price as hundreths is kinda old school but, sqlite3 doesn't have decimal type
 - Assuming Plans cannot be free
-- Only supports formatting plans up to 999.99
 - Sqlite will only let me make thing not null with a default when I'm creating a table not when adding a column hence the lack of constraint on the plans foreign key to countries
-- Country and Currency validation?
+- Country Code and Currency validation is left off since there's no user manner of adding data

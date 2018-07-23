@@ -18,8 +18,8 @@ class PlanTest < ActiveSupport::TestCase
   end
 
   def test_loads_seeds
-    assert_equal 1, Plan.count
-    assert_equal 3, Plan.first.benefits.count
+    assert_equal 3, Country.count
+    assert_equal 4, Plan.count
   end
 
   def test_must_be_valid
