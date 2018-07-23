@@ -6,7 +6,7 @@
 - Expects some local libraries including the libsqlite3 dev library
 - running ./bin/setup from this directory should handle setting things up
 - You can start the server with `rails server` and view it at http://localhost:3000
-- You can run the tests with `rake test` after setup and `rake db:test:prepare`
+- You can run the tests with `rake test` after setup
 
 ## Challenge Overview
 Build a website for a company that sells subscriptions to legal plans in different countries. The app does not need to be hosted anywhere but should work as expected when run locally.
@@ -28,7 +28,7 @@ Build a website for a company that sells subscriptions to legal plans in differe
    * GET all plans available for a country (return a list of id, name, price)
      - Available at /countries/:id.json
    * GET a single plan for a country (return a list of id, name, price and benefit information (benefit name, description))
-     - Available at /countries/country_id/plans/:id.json
+     - Available at /countries/:country_id/plans/:id.json
 - Write an integration test for at least one of the routes
 - Write some unit tests for your models
 
