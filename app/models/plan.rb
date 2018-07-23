@@ -10,4 +10,5 @@ class Plan < ApplicationRecord
   def price
     "#{format('%.2f', price_hundredths / 100.0)} #{country.currency}"
   end
+
 end
