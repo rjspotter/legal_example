@@ -8,8 +8,8 @@ class PlanTest < ActiveSupport::TestCase
       price_hundredths: 100,
       name: "FooBar",
       description: "Some Cow Funk",
-      country: "US",
-      currency: "USD"
+      country: Country.find("US"),
+      benefits: Benefit.all
     }
   end
 
@@ -43,30 +43,25 @@ class PlanTest < ActiveSupport::TestCase
     assert_not with_overrides(description: "").valid?
   end
 
-  def test_country_must_be_us
+  def test_country_must_exist
     assert_not with_overrides(country: nil).valid?
-    assert_not with_overrides(country: "").valid?
-    assert_not with_overrides(country: "USA").valid?
-    assert_not with_overrides(country: "UK").valid?
   end
 
-  def test_currency_must_be_usd
-    assert_not with_overrides(currency: nil).valid?
-    assert_not with_overrides(currency: "").valid?
-    assert_not with_overrides(currency: "GBP").valid?
-  end
-
-  def test_must_not_have_duplicates
+  def test_must_not_have_duplicates_in_same_country
     assert with_overrides(name: "dupcheck").save
     assert_not with_overrides(name: "dupcheck").save
+    new_country = Country.create(id: "MT", currency: "EUR")
+    assert with_overrides(name: "dupcheck", country: new_country).save
+  end
+
+  def test_must_have_benefits
+    assert_not with_overrides(benefits: []).valid?
   end
 
   def test_benefits_must_not_be_repeated
     subject = with_overrides(name: "dupbenefits")
     assert subject.save
     benefit = Benefit.first
-    subject.benefits << benefit
-    assert subject.save
     assert_raises(ActiveRecord::RecordNotUnique) do
       subject.benefits << benefit
       subject.save

@@ -6,15 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-plan = Plan.create(country: 'US',
-                   currency: 'USD',
-                   price_hundredths: 10000,
-                   name: "Simple Plan",
-                   description: "Some Cow Funk"
-                  )
+country = Country.create(id: 'US',
+                         currency: 'USD')
 
 3.times do |i|
   Benefit.create(name: Faker::Company.unique.name,
-                 description: Faker::Hacker.say_something_smart,
-                 plans: [plan])
+                 description: Faker::Hacker.say_something_smart)
 end
+
+plan = Plan.create(country: country,
+                   price_hundredths: 10000,
+                   name: "Simple Plan",
+                   description: "Some Cow Funk",
+                   benefits: Benefit.all
+                  )
