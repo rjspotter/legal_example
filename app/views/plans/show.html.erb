@@ -1,0 +1,15 @@
+<p>
+  <%= @plan.description %>
+</p>
+<ul>
+  <% @plan.benefits.each do |benefit|  %>
+    <li>
+      <h5>
+        <%= benefit.name %>
+      </h5>
+      <p>
+        <%= benefit.description %>
+      </p>
+    </li>
+  <% end %>
+</ul>

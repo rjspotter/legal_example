@@ -1,0 +1,13 @@
+<ul>
+  <% @plans.each do |plan| %>
+    <li>
+      <h4>
+        <%= link_to(plan.name, country_plan_path(id: plan.id, country_id: plan.country.id)) %>
+      </h4>
+      <p>
+        <%= plan.price %>
+      </p>
+      <%= button_tag("subscribe") %>
+    </li>
+  <% end %>
+</ul>
