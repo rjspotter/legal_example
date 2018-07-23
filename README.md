@@ -48,13 +48,12 @@ Build a website for a company that sells subscriptions to legal plans in differe
 
 ## Notes
 
-- Two letter country codes would be a good primary key for a countries table.  Since I don't really need anything but the PK I'm skipping the table; You could say it's implied. I'm choosing ISO ALPHA-2 you could make an argument for ALPHA-3 or UN M49
+- I'm choosing ISO ALPHA-2 for the country primary key you could make an argument for ALPHA-3 or UN M49
 - I had considered a more normalized structure where you could look up prices and features by a compound key of country & plan but, I don't think that model plays well with AR so I came up with this simplified version which is more de-normalized
-- Faker for seeds?
-- Not going too far down the internationalization rabbit hole; ex: currency formatting is only supports formatting plans up to 999.99 and formats using identifiers like USD and not $
+- Not going too far down the internationalization rabbit hole; Limiting to the english speaking world (no translation/localization files), currency formatting is only supports formatting plans up to 999.99 and formats using identifiers like USD and not $
 - You can actually embed your translations in the DB if you're using Postgres & hstore
 - Storing price as hundreths is kinda old school but, sqlite3 doesn't have decimal type
-- Country and Currency validation?
 - Assuming Plans cannot be free
-- Can Plans have no benefits?  Can Benefits have no plans?
-- Only supports formatting plans up to 999.99 
+- Only supports formatting plans up to 999.99
+- Sqlite will only let me make thing not null with a default when I'm creating a table not when adding a column hence the lack of constraint on the plans foreign key to countries
+- Country and Currency validation?
